@@ -54,13 +54,13 @@ clc;
 % Create and plot robot
 robot = DobotMagician();
 q0 = [0, pi/6, pi/4, pi/2, 0];
-workspace = [-0.5, 0.5, -0.5, 0.5, 0, 0.5];
+workspace = [-1, 1, -1, 1, -1, 1];
 scale = 0.5;
 robot.model.plot(q0,'workspace',workspace,'scale',scale);
 axis(workspace);
 hold on;
 
-% Plot and detect color for green square
+%% Plot and detect color for green square
 [f, v, data] = plyread('green_square.ply', 'tri');
 vertexColours = [data.vertex.red, data.vertex.green, data.vertex.blue] / 255;
 square_start_position = [0.25, 0, 0];
@@ -74,7 +74,7 @@ square1 = trisurf(f, square_v_transformation(:, 1), square_v_transformation(:, 2
 detectedColor_square = detectObjectColor(vertexColours);
 disp(['Detected Color for Square: ', detectedColor_square]);
 
-% Plot and detect color for blue octagon
+%% Plot and detect color for blue octagon
 [f, v, data] = plyread('blue_octagon.ply', 'tri');
 vertexColours = [data.vertex.red, data.vertex.green, data.vertex.blue] / 255;
 octagon_start_position = [0.25, 0.07, 0];
@@ -88,7 +88,7 @@ octagon1 = trisurf(f, octagon_v_transformation(:, 1), octagon_v_transformation(:
 detectedColor_octagon = detectObjectColor(vertexColours);
 disp(['Detected Color for Octagon: ', detectedColor_octagon]);
 
-% Plot and detect color for red hexagon
+%% Plot and detect color for red hexagon
 [f, v, data] = plyread('red_hexagon.ply', 'tri');
 vertexColours = [data.vertex.red, data.vertex.green, data.vertex.blue] / 255;
 hexagon_start_position = [0.25, -0.07, 0];
@@ -102,7 +102,7 @@ hexagon1 = trisurf(f, hexagon_v_transformation(:, 1), hexagon_v_transformation(:
 detectedColor_hexagon = detectObjectColor(vertexColours);
 disp(['Detected Color for Hexagon: ', detectedColor_hexagon]);
 
-% After plotting the objects (green square, blue octagon, red hexagon)
+%% After plotting the objects (green square, blue octagon, red hexagon)
 detectAndPlaceShape(robot, square_v_transformation, vertexColours, square_start_position);
 detectAndPlaceShape(robot, triangle_v_transformation, vertexColours, triangle_start_position);
 detectAndPlaceShape(robot, v_transformation, vertexColours, start_position);
