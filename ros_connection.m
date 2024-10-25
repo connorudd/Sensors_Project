@@ -65,23 +65,12 @@
 % Step 7: Shutdown the ROS connection after the movement is completed
 % rosshutdown;
 
-
-% Initialize Serial Port
-dobot = serialport("COM3", 115200);
-% Set line terminator
-configureTerminator(dobot, "CR/LF");
-
-
-writeline(dobot, "VER");
-pause(1); % Wait for response
-if dobot.NumBytesAvailable > 0
-    response = readline(dobot);
-    disp("Response from Dobot: " + response);
-else
-    disp("No response received from Dobot.");
-end
-
-
+% 
+% % Initialize Serial Port
+% dobot = serialport("COM3", 115200);
+% % Set line terminator
+% configureTerminator(dobot, "CR/LF");
+% 
 % % Enable motors to allow movement
 % try
 %     writeline(dobot, "M17");
@@ -171,3 +160,57 @@ end
 %     disp("Error while closing serial port:");
 %     disp(ME.message);
 % end
+
+%% Initialize ROS and connect to the robot
+ipaddress = '172.28.114.129';  % Replace with your ROS master IP
+rosinit(ipaddress, 11311);      % Port 11311 is the default ROS master port
+
+% Corrected the variable name for the gripper client
+client_setPosition = rossvcclient('/DobotServer/SetPTPCmd');
+client_getColor = rossvcclient('/DobotServer/GetColorSensor');
+client_gripper = rossvcclient('/DobotServer/SetEndEffectorGripper'); % Fixed typo from lient_gripper to client_gripper
+
+% Function to move the robot to a given (X, Y, Z, R) position
+function moveToPosition(client, x, y, z, r)
+    cmd = rosmessage(client);
+    cmd.PtpMode = 2;  % Linear mode
+    cmd.X = x;
+    cmd.Y = y;
+    cmd.Z = z;
+    cmd.R = r;
+    call(client, cmd);
+end
+
+% Function to set the gripper state
+function setGripper(client, state)
+    gripper_cmd = rosmessage(client);
+    gripper_cmd.IsEndEffectorEnabled = 1;  % Activate end-effector
+    gripper_cmd.EndEffectorState = state;   % 1 = Close, 0 = Open
+    call(client, gripper_cmd);
+end
+
+% Define pick and place positions
+start_position = [200, -20, 135, 0]; % Added orientation (R)
+pick_position = [239.9, 46.3, -12.24, 0]; % Added orientation (R)
+target_position = [167.57, 189, -13.2, 0]; % Added orientation (R)
+
+% Move to start position
+moveToPosition(client_setPosition, start_position(1), start_position(2), ...
+        start_position(3), start_position(4)); % Added R parameter
+
+% Move to pick position
+moveToPosition(client_setPosition, pick_position(1), pick_position(2), ...
+        pick_position(3), pick_position(4)); % Added R parameter
+
+% Close the gripper to pick the object
+setGripper(client_gripper, 1);
+
+% Move to target position
+moveToPosition(client_setPosition, target_position(1), ...
+        target_position(2), target_position(3), target_position(4)); % Added R parameter
+
+% Open the gripper to release the object
+setGripper(client_gripper, 0);
+
+% Shutdown ROS after completion
+rosshutdown;
