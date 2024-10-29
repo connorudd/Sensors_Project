@@ -1,4 +1,6 @@
-function movement()
+moveIT();
+%% move the robot 
+function moveIT()
 clear all;
 clc;
 close all;
@@ -70,7 +72,6 @@ end_effector_position = [0.20705,0.008,0.1266];
 end_effector_rotation = [0,0,0];
 dobot.PublishEndEffectorPose(end_effector_position,end_effector_rotation);
 pause;
-end
 
 %% Blue colour option
 elseif colours_detected(2) == 1 && colours_detected(1) == 0
@@ -125,70 +126,70 @@ end_effector_position = [0.20705,0.008,0.1266];
 end_effector_rotation = [0,0,0];
 dobot.PublishEndEffectorPose(end_effector_position,end_effector_rotation);
 pause;
-end
 
 %% Red colour option
 elseif colours_detected(1) == 0 && colours_detected(2) == 0 && colours_detected(3) == 1
 disp('Red colour detected!');
-%% Pick #3 above
+% Pick #3 above
 end_effector_position = [0.263768, -0.03394, 0.0311498];
 end_effector_rotation = [0,0,0];
 dobot.PublishEndEffectorPose(end_effector_position,end_effector_rotation);
 pause;
-%% Pick #3 
+% Pick #3 
 end_effector_position = [0.263882, -0.03296, -0.0185];
 end_effector_rotation = [0,0,0];
 dobot.PublishEndEffectorPose(end_effector_position,end_effector_rotation);
 pause;
-%% CLOSE
+% CLOSE
 onOff = 1;
 openClose = 1;
 dobot.PublishToolState(onOff,openClose);
 pause;
-%% traj 
+% traj 
 end_effector_position = [0.1599, -0.181,0.1130];
 end_effector_rotation = [0,0,0];
 dobot.PublishEndEffectorPose(end_effector_position,end_effector_rotation);
 pause;
-%% Place #3 above 
+% Place #3 above 
 end_effector_position = [0.1349, -0.2291, 0.024776];
 end_effector_rotation = [0,0,0];
 dobot.PublishEndEffectorPose(end_effector_position,end_effector_rotation);
 pause;
-%% Place #3  
+% Place #3  
 end_effector_position = [0.1379, -0.2234, -0.018];
 end_effector_rotation = [0,0,0];
 dobot.PublishEndEffectorPose(end_effector_position,end_effector_rotation);
 pause;
-%% OPEN
+% OPEN
 onOff = 1;
 openClose = 0;
 dobot.PublishToolState(onOff,openClose);
 pause;
-%% Place #3 above 
+% Place #3 above 
 end_effector_position = [0.1349, -0.2291, 0.024776];
 end_effector_rotation = [0,0,0];
 dobot.PublishEndEffectorPose(end_effector_position,end_effector_rotation);
 pause;
-%% traj 
+% traj 
 end_effector_position = [0.1599, -0.181,0.1130];
 end_effector_rotation = [0,0,0];
 dobot.PublishEndEffectorPose(end_effector_position,end_effector_rotation);
 pause;
-%% Home
+% Home
 end_effector_position = [0.20705,0.008,0.1266];
 end_effector_rotation = [0,0,0];
 dobot.PublishEndEffectorPose(end_effector_position,end_effector_rotation);
 pause;
-end
 else 
-%% Turn off tool
+% Turn off tool
 onOff = 0;
 openClose = 0;
 dobot.PublishToolState(onOff,openClose);
-end
+end 
+
 disp('Demonstration Completed (move it move it');
 end
+
 %% Fucntion for Image processing
 function colours_detected = ProcessImage()
 
@@ -196,9 +197,9 @@ function colours_detected = ProcessImage()
     clc;
     
     % Capture an RGB image from the camera
-    % camList = webcamlist;  % List available webcams
-    % disp('Available cameras:');
-    % disp(camList);
+    camList = webcamlist;  % List available webcams
+    disp('Available cameras:');
+    disp(camList);
 
     % Connect to the D435 camera (replace index if necessary)
     cam = webcam(2);  % Adjust the index if needed
