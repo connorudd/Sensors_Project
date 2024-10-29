@@ -1,12 +1,12 @@
-% clear all;
-% clc;
-% close all;
-% rosshutdown;
-% %% Start Dobot Magician Node
-%  rosinit('192.168.27.1');
-% % 
-%  %% Start Dobot ROS
-%  dobot = DobotMagician();
+clear all;
+clc;
+close all;
+rosshutdown;
+%% Start Dobot Magician Node
+ rosinit('192.168.27.1');
+% 
+ %% Start Dobot ROS
+ dobot = DobotMagician();
 
 %% Home
 end_effector_position = [0.20705,0.008,0.1266];
@@ -39,7 +39,7 @@ end_effector_rotation = [0,0,0];
 dobot.PublishEndEffectorPose(end_effector_position,end_effector_rotation);
 pause;
 %% Place #1 
-end_effector_position = [-0.004, -0.2269, -0.0194];
+end_effector_position = [-0.004, -0.2269, -0.022];
 end_effector_rotation = [0,0,0];
 dobot.PublishEndEffectorPose(end_effector_position,end_effector_rotation);
 pause;
@@ -69,7 +69,7 @@ end_effector_rotation = [0,0,0];
 dobot.PublishEndEffectorPose(end_effector_position,end_effector_rotation);
 pause;
 %% Pick # 2  
-end_effector_position = [0.20335,0.0976, -0.01337];
+end_effector_position = [0.20335,0.0976, -0.021];
 end_effector_rotation = [0,0,0];
 dobot.PublishEndEffectorPose(end_effector_position,end_effector_rotation);
 pause;
@@ -89,7 +89,7 @@ end_effector_rotation = [0,0,0];
 dobot.PublishEndEffectorPose(end_effector_position,end_effector_rotation);
 pause;
 %% Place #2
-end_effector_position = [0.0633,-0.2194, -0.018];
+end_effector_position = [0.0633,-0.2194, -0.021];
 end_effector_rotation = [0,0,0];
 dobot.PublishEndEffectorPose(end_effector_position,end_effector_rotation);
 pause;
@@ -139,7 +139,7 @@ end_effector_rotation = [0,0,0];
 dobot.PublishEndEffectorPose(end_effector_position,end_effector_rotation);
 pause;
 %% Place #3  
-end_effector_position = [0.1379, -0.2234, -0.0232];
+end_effector_position = [0.1379, -0.2234, -0.018];
 end_effector_rotation = [0,0,0];
 dobot.PublishEndEffectorPose(end_effector_position,end_effector_rotation);
 pause;
@@ -147,6 +147,11 @@ pause;
 onOff = 1;
 openClose = 0;
 dobot.PublishToolState(onOff,openClose);
+pause;
+%% Place #3 above 
+end_effector_position = [0.1349, -0.2291, 0.024776];
+end_effector_rotation = [0,0,0];
+dobot.PublishEndEffectorPose(end_effector_position,end_effector_rotation);
 pause;
 %% traj 
 end_effector_position = [0.1599, -0.181,0.1130];
@@ -158,3 +163,7 @@ end_effector_position = [0.20705,0.008,0.1266];
 end_effector_rotation = [0,0,0];
 dobot.PublishEndEffectorPose(end_effector_position,end_effector_rotation);
 pause;
+%% Turn off tool
+onOff = 0;
+openClose = 0;
+dobot.PublishToolState(onOff,openClose);
