@@ -305,6 +305,7 @@ function moveIT()
 
     % Move robot to the home position
     homePosition = [0.20705, 0.008, 0.1266];
+    trajPosition = [0.1599, -0.181, 0.1130];
     homeRotation = [0, 0, 0];
     dobot.PublishEndEffectorPose(homePosition, homeRotation);
     pause;
@@ -332,7 +333,6 @@ function moveIT()
             pause;
 
             % Trajectory position (move back up)
-            trajPosition = [0.1599, -0.181, 0.1130];
             dobot.PublishEndEffectorPose(trajPosition, [0, 0, 0]);
             pause;
 
@@ -354,6 +354,10 @@ function moveIT()
             dobot.PublishEndEffectorPose(placeAbovePosition, [0, 0, 0]);
             pause;
 
+            % Trajectory position (move back up)
+            dobot.PublishEndEffectorPose(trajPosition, [0, 0, 0]);
+            pause;
+
             % Return to home position
             dobot.PublishEndEffectorPose(homePosition, homeRotation);
             pause;
@@ -371,12 +375,18 @@ function moveIT()
             pickPosition = [0.20335, 0.0976, -0.021];
             dobot.PublishEndEffectorPose(pickPosition, [0, 0, 0]);
             pause;
+
+            % Close gripper 
             dobot.PublishToolState(1, 1);  % Close gripper
             pause;
 
             % Trajectory to move upwards
-            trajPosition = [0.1599, -0.181, 0.1130];
             dobot.PublishEndEffectorPose(trajPosition, [0, 0, 0]);
+            pause;
+
+            % Place above #2
+            placePosition2 = [0.05572,-0.22389 , 0.04834];
+            dobot.PublishEndEffectorPose(placePosition2, [0, 0, 0]);
             pause;
 
             % Place object at designated position
@@ -386,6 +396,14 @@ function moveIT()
 
             % Release object by opening gripper
             dobot.PublishToolState(1, 0);  % Open gripper
+            pause;
+
+            % Place above #2
+            dobot.PublishEndEffectorPose(placePosition2, [0, 0, 0]);
+            pause;
+
+            % Trajectory to move upwards
+            dobot.PublishEndEffectorPose(trajPosition, [0, 0, 0]);
             pause;
 
             % Return to home position
@@ -405,12 +423,18 @@ function moveIT()
             pickPosition = [0.263882, -0.03296, -0.013];
             dobot.PublishEndEffectorPose(pickPosition, [0, 0, 0]);
             pause;
+
+            % close 
             dobot.PublishToolState(1, 1);  % Close gripper
             pause;
 
             % Trajectory to move upwards
-            trajPosition = [0.1599, -0.181, 0.1130];
             dobot.PublishEndEffectorPose(trajPosition, [0, 0, 0]);
+            pause;
+
+            % Place above #3
+            placePosition3 = [0.1349, -0.2291, 0.024776];
+            dobot.PublishEndEffectorPose(placePosition, [0, 0, 0]);
             pause;
 
             % Place object at designated position
@@ -420,6 +444,14 @@ function moveIT()
 
             % Release object by opening gripper
             dobot.PublishToolState(1, 0);  % Open gripper
+            pause;
+
+            % Place above #3
+            dobot.PublishEndEffectorPose(placePosition3, [0, 0, 0]);
+            pause;
+
+            % Trajectory to move upwards
+            dobot.PublishEndEffectorPose(trajPosition, [0, 0, 0]);
             pause;
 
             % Return to home position
