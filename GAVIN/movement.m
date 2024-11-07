@@ -2,8 +2,8 @@
 % Main script for controlling the Dobot robot and processing images
 
 % Initialize by moving the robot and processing an image
-moveIT();
-% ProcessImage();
+% moveIT();
+ ProcessImage();
 
 %% Main function to control robot movements
 function moveIT()
