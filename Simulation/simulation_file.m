@@ -188,6 +188,7 @@ function moveRobotToPosition(robot, position)
     % Loop through each step in the trajectory
     for i = 1:steps
         robot.model.animate(traj(i, :));  % Move the robot to the next position in the trajectory
+        % disp(['Step ' num2str(i) ': Joint positions = ' num2str(traj(i, :))]);
         pause(0.05);                      % Brief pause to control animation speed
     end
 
