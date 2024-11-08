@@ -81,14 +81,20 @@ To run the live demo with the physical DoBot robot and camera:
     prematurely may cause errors.
 - The demo follows a sequential process:
   - **Initialization**: The robot moves to a home position.
-  - **Colour Detection**: An image is captured, and colours are detected to identify red, green, and blue objects.
-  - **Object Manipulation**: Based on detected colours, the robot moves to each object’s location, picks it up, and places it at a target position.
+  - **Colour Detection**: An image is captured, and colours are detected to 
+    identify red, green, and blue objects.
+  - **Object Manipulation**: Based on detected colours, the robot moves to 
+    each object’s location, picks it up, and places it at a target position.
 
 ## Project Files Overview
 
-- **`improved_movement.m`**: The main control file for the robot’s movements, including object detection and manipulation.
-- **`ProcessImage.m`**: Image processing code to capture an RGB image, detect colours using HSV thresholds, and label detected objects.
-- **`DoBotMagician.m`**: Contains methods for interacting with the DoBot robot via ROS, such as publishing end-effector poses and controlling the gripper.
+- **`improved_movement.m`**: The main control file for the robot’s 
+    movements, including object detection and manipulation.
+- **`ProcessImage.m`**: Image processing code to capture an RGB image, 
+    detect colours using HSV thresholds, and label detected objects.
+- **`DoBotMagician.m`**: Contains methods for interacting with the DoBot 
+    robot via ROS, such as publishing end-effector poses and controlling 
+    the gripper.
 - **`The movement.m file contains the code for Demo-Day, whilst 
   improved_movement is the edited code we finalised the following week. 
 
